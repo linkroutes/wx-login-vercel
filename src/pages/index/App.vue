@@ -26,15 +26,6 @@ export default {
     };
   },
   created() {
-    this.$tool.preload({
-      list: [{ src: require("../images/hi.png") }],
-      progress: (percent) => {
-        this.loadingTxt = percent;
-      },
-      success: () => {
-        Toast("加载完毕!");
-      },
-    });
     let urlData = this.$tool.parseURL(location.href).params;
     console.log("页面携带的参数：", urlData);
     this.openId = urlData.openId;
