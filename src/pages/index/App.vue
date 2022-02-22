@@ -28,7 +28,7 @@ export default {
   created() {
     let urlData = this.$tool.parseURL(location.href).params;
     console.log("页面携带的参数：", urlData);
-    this.openId = urlData.openId;
+    this.openId = urlData.openid;
     this.checkAuth(this.openId, this.token);
   },
   methods: {
