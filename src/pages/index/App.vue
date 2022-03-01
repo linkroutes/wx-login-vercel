@@ -22,6 +22,7 @@ export default {
       loadingTxt: 0,
       root: "https://vwx.linkroutes.com/",
       auth: "wx/authorize",
+      signature: "wx/signature",
       openId: "",
     };
   },
@@ -36,6 +37,7 @@ export default {
       console.log("是否有openId:", openId);
       if (openId) {
         Toast("授权成功");
+        this.setShare();
       } else {
         this.go2auth(location.href);
       }
@@ -45,6 +47,30 @@ export default {
       let target =
         this.root + this.auth + `?redirect=` + encodeURIComponent(url);
         location.replace(target);
+    },
+    setShare(cb) {
+      axios({
+        method: "post",
+        url: this.root + this.signature,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        transformRequest: [
+          (data) => {
+            data = qs.stringify(data);
+            return data;
+          },
+        ],
+        data: {
+          url: encodeURIComponent(location.href.split("#")[0]),
+        },
+      })
+        .then((data) => {
+          console.log('8888888',data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
