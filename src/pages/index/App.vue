@@ -50,23 +50,14 @@ export default {
     },
     setShare(cb) {
       axios({
-        method: "post",
+        method: "get",
         url: this.root + this.signature,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        transformRequest: [
-          (data) => {
-            data = qs.stringify(data);
-            return data;
-          },
-        ],
         data: {
           url: encodeURIComponent(location.href.split("#")[0]),
         },
       })
         .then((data) => {
-          console.log('8888888',data)
+          console.log('888888899',data)
         })
         .catch((err) => {
           console.log(err);
