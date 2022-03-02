@@ -37,6 +37,7 @@ export default {
       console.log("是否有openId:", openId);
       if (openId) {
         Toast("授权成功");
+        console.log(99999)
         this.setShare();
       } else {
         this.go2auth(location.href);
@@ -50,14 +51,23 @@ export default {
     },
     setShare(cb) {
       axios({
-        method: "get",
+        method: "post",
         url: this.root + this.signature,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        transformRequest: [
+          (data) => {
+            data = qs.stringify(data);
+            return data;
+          },
+        ],
         data: {
           url: encodeURIComponent(location.href.split("#")[0]),
         },
       })
         .then((data) => {
-          console.log('888888899',data)
+          console.log('8888888',data)
         })
         .catch((err) => {
           console.log(err);
